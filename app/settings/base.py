@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    "app.bav",
+    "wagtail.contrib.modeladmin",
 ]
 
 MIDDLEWARE = [
@@ -164,3 +167,5 @@ WAGTAILSEARCH_BACKENDS = {
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = "http://example.com"
+
+WAGTAILIMAGES_IMAGE_MODEL = 'bav.CustomImage'

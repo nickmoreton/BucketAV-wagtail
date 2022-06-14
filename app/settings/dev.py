@@ -11,6 +11,12 @@ ALLOWED_HOSTS = ["*"]
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
+CSRF_TRUSTED_ORIGINS = ["https://*.gitpod.io"]
+
+INSTALLED_APPS += [
+    "wagtail.contrib.styleguide",
+    "django_extensions",
+]
 
 try:
     from .local import *
