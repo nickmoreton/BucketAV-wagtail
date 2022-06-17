@@ -50,4 +50,5 @@ def scan_hook(request):
         # log(image_obj, "wagtail_package.echo", data={"scanned": True, "malicious": False})
         return HttpResponse("Good")
     else:
+        # show we return a 404 or 200?
         return HttpResponseNotFound("Image not found")

@@ -1,20 +1,11 @@
-# from wagtail.contrib.modeladmin.options import ModelAdmin, modeladmin_register
-# from app.bav.models import BavItem
 from django.urls import path, reverse
 from wagtail import hooks
 from wagtail.admin.menu import AdminOnlyMenuItem
+from wagtail.images.wagtail_hooks import ImagesSummaryItem as SummaryItem
 
 from app.bav.views import ImagesReportView
-
-# class BavItemAdmin(ModelAdmin):
-#     model = BavItem
-#     list_display = ("file_name", "title", "scanned", "malicious", "waiting_for_scan", "updated_at", "created_at")
-#     ordering = ("-malicious", "-updated_at",)
-#     # list_filter = ("malicious", "scanned", "waiting_for_scan")
-
-
-# modeladmin_register(BavItemAdmin)
-
+from wagtail.admin.navigation import get_site_for_user
+from wagtail.images import get_image_model
 
 @hooks.register('register_reports_menu_item')
 def register_images_report_view_meny_item():
@@ -27,6 +18,28 @@ def images_report_urls():
         path('admin/reports/images_log/', ImagesReportView.as_view(), name='image_report_view'),
     ]
 
-# @hooks.register('register_log_actions')
-# def images_report_action(actions):
-#     actions.register_action('wagtail_package.echo', 'Echo', 'Sent an echo')
+# class ImagesSummaryItem(SummaryItem):
+#     # order = 200
+#     # template_name = "wagtailimages/homepage/site_summary_images.html"
+
+#     def get_context_data(self, parent_context):
+#         site_name = get_site_for_user(self.request.user)["site_name"]
+
+#         return {
+#             "total_images": get_image_model().objects.count(),
+#             "site_name": site_name,
+#         }
+
+#     # def is_shown(self):
+#     #     return permission_policy.user_has_any_permission(
+#     #         self.request.user, ["add", "change", "delete"]
+#     #     )
+
+
+# # @hooks.unregister('construct_homepage_summary_items')
+# # def construct_homepage_summary_items(request, items):
+# #     pass
+
+# @hooks.register("construct_homepage_summary_items")
+# def add_images_summary_item(request, items, order=900):
+#     items.append(ImagesSummaryItem(request))
