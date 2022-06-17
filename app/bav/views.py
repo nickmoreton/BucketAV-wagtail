@@ -2,16 +2,16 @@ from django.http import HttpResponse, HttpResponseNotFound
 from wagtail.admin.filters import WagtailFilterSet
 from wagtail.admin.views.reports import ReportView
 from wagtail.images import get_image_model
+
 # from wagtail.log_actions import log
 from wagtail.models import ModelLogEntry
 from wagtail.images import get_image_model
 
 
 class ImagesReportFilterSet(WagtailFilterSet):
-
     class Meta:
         model = get_image_model()
-        fields = ["scanned"]
+        fields = ["scanned", "malicious"]
 
 
 class ImagesReportView(ReportView):
@@ -27,7 +27,7 @@ class ImagesReportView(ReportView):
 
 def scan_hook(request):
     #  http://localhost:8000/bav/scan-hook/?filename=alesia-kazantceva-VWcPlbHglYc-unsplash.jpg&result=1
-    
+
     filename = request.GET.get("filename")
     result = request.GET.get("result")
     # print(filename, result)
@@ -38,7 +38,9 @@ def scan_hook(request):
     They are appended with a hash if they are accepted duplicates.
     Wagtail takes care of this ???
     """
-    image_obj = get_image_model().objects.filter(file="original_images/" + filename).all()
+    image_obj = (
+        get_image_model().objects.filter(file="original_images/" + filename).all()
+    )
 
     # I suppose it's not a bad idea to check though
     if len(image_obj) == 1 and result == "1":

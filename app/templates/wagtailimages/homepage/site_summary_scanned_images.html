@@ -1,0 +1,14 @@
+
+{% load i18n wagtailadmin_tags %}
+
+<li>
+    {% icon name="view" %}
+    {% comment %} {{ total_malicious_images }} {% endcomment %}
+    <a href="{% url 'image_report_view' %}?scanned=true">
+        {% blocktrans trimmed count counter=total_scanned_images with total_scanned_images|intcomma as total %}
+            <span>{{ total }}</span> Scanned Image <span class="visuallyhidden">created in {{ site_name }}</span>
+        {% plural %}
+            <span>{{ total }}</span> Scanned Images <span class="visuallyhidden">created in {{ site_name }}</span>
+        {% endblocktrans %}
+    </a>
+</li>
