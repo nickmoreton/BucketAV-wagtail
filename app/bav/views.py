@@ -26,7 +26,11 @@ class ImagesReportView(ReportView):
 
 
 def scan_hook(request):
-    #  http://localhost:8000/bav/scan-hook/?filename=alesia-kazantceva-VWcPlbHglYc-unsplash.jpg&result=1
+    #  /bav/scan-hook/?filename=daniel-j-schwarz-AMUlb2KGqyI-unsplash.jpg&result=1
+    #  /bav/scan-hook/?filename=filipp-romanovski-Cv_XT0uOlBk-unsplash.jpg&result=0
+    #  /bav/scan-hook/?filename=mohsen-karimi--ojEJuaJIAU-unsplash.jpg&result=1
+    #  /bav/scan-hook/?filename=surface-xGRLP2obiSg-unsplash.jpg&result=0
+    #  /bav/scan-hook/?filename=elia-pellegrini-nvPFxa_24Xc-unsplash.jpg&result=1
 
     filename = request.GET.get("filename")
     result = request.GET.get("result")
