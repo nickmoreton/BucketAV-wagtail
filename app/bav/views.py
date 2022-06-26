@@ -1,10 +1,5 @@
-from django.http import HttpResponse, HttpResponseNotFound
 from wagtail.admin.filters import WagtailFilterSet
 from wagtail.admin.views.reports import ReportView
-from wagtail.images import get_image_model
-
-# from wagtail.log_actions import log
-from wagtail.models import ModelLogEntry
 from wagtail.images import get_image_model
 
 
@@ -25,36 +20,14 @@ class ImagesReportView(ReportView):
         return get_image_model().objects.all().order_by("-malicious")
 
 
-def scan_hook(request):
-    #  /bav/scan-hook/?filename=daniel-j-schwarz-AMUlb2KGqyI-unsplash.jpg&result=1
-    #  /bav/scan-hook/?filename=filipp-romanovski-Cv_XT0uOlBk-unsplash.jpg&result=0
-    #  /bav/scan-hook/?filename=mohsen-karimi--ojEJuaJIAU-unsplash.jpg&result=1
-    #  /bav/scan-hook/?filename=surface-xGRLP2obiSg-unsplash.jpg&result=0
-    #  /bav/scan-hook/?filename=elia-pellegrini-nvPFxa_24Xc-unsplash.jpg&result=1
+def scan_hook_simulation(filename, result):
+    """Simulate an endpoint to be called by the scan hook.
+    Gets an image (custom image model) by it's original filename and update it's status."""
+    image_obj = get_image_model().objects.filter(file=filename)
 
-    filename = request.GET.get("filename")
-    result = request.GET.get("result")
-    # print(filename, result)
-
-    """
-    This gets an image by it's filename.
-    Wagtail never has duplicate file names, file system would error too. 
-    They are appended with a hash if they are accepted duplicates.
-    Wagtail takes care of this ???
-    """
-    image_obj = (
-        get_image_model().objects.filter(file="original_images/" + filename).all()
-    )
-
-    # I suppose it's not a bad idea to check though
-    if len(image_obj) == 1 and result == "1":
+    if result == "1":
         image_obj.update(scanned=True, malicious=True)
-        # log(image_obj, "wagtail_package.echo", data={"scanned": True, "malicious": True})
-        return HttpResponse("Bad")
-    elif len(image_obj) == 1 and result == "0":
+    elif result == "0":
         image_obj.update(scanned=True, malicious=False)
-        # log(image_obj, "wagtail_package.echo", data={"scanned": True, "malicious": False})
-        return HttpResponse("Good")
-    else:
-        # show we return a 404 or 200?
-        return HttpResponseNotFound("Image not found")
+    elif result == "2":
+        image_obj.update(scanned=False, malicious=False)

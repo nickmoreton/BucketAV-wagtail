@@ -1,21 +1,31 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static home_tags %}
 
 {% block body_class %}template-homepage{% endblock %}
 
-{% block extra_css %}
-
-{% comment %}
-Delete the line below if you're just getting started and want to remove the welcome screen!
-{% endcomment %}
-<link rel="stylesheet" href="{% static 'css/welcome_page.css' %}">
-{% endblock extra_css %}
-
 {% block content %}
 
-{% comment %}
-Delete the line below if you're just getting started and want to remove the welcome screen!
-{% endcomment %}
-{% include 'home/welcome_page.html' %}
+<div class="container">
+    <h1>Change Image Status</h1>
+
+    <ul>
+        {% for image in images %}
+        <li>
+            <div>{{ image|concat_image_filename }}</div>
+            <div>
+            <a href="?filename={{ image.file }}&result=0"><button class="{% if image.scanned %}active{% endif %}">Scanned</button></a>
+            
+            <a href="?filename={{ image.file }}&result=1"><button class="{% if image.malicious %}active{% endif %}">Malicious</button></a>
+            
+            <a href="?filename={{ image.file }}&result=2"><button class="reset">Reset</button></a>
+                <= <span>Fake web hook</span>
+            </div>
+            
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<hr />
 
 {% endblock content %}

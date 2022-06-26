@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     "app.bav",
     "wagtail.contrib.modeladmin",
 ]
@@ -168,4 +167,4 @@ WAGTAILSEARCH_BACKENDS = {
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = "http://example.com"
 
-WAGTAILIMAGES_IMAGE_MODEL = 'bav.CustomImage'
+WAGTAILIMAGES_IMAGE_MODEL = "bav.CustomImage"

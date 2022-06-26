@@ -1,13 +1,13 @@
 from django.db import models
-from wagtail.images.models import AbstractImage, AbstractRendition, Image
 from django.urls import reverse
-
-# from wagtail.log_actions import log
+from wagtail.images.models import AbstractImage, AbstractRendition, Image
 
 
 class CustomImage(AbstractImage):
-    scanned = models.BooleanField(default=False)
-    malicious = models.BooleanField(default=False)
+    """Custom image model"""
+
+    scanned = models.BooleanField(default=False)  # new field
+    malicious = models.BooleanField(default=False)  # new field
     admin_form_fields = Image.admin_form_fields
 
     def get_delete_url(self):
@@ -15,6 +15,8 @@ class CustomImage(AbstractImage):
 
 
 class Rendition(AbstractRendition):
+    """Custom rendition model, straight out of the Wagtail docs"""
+
     image = models.ForeignKey(
         "CustomImage", related_name="renditions", on_delete=models.CASCADE
     )

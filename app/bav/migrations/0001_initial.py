@@ -7,25 +7,32 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='BavItem',
+            name="BavItem",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('file_name', models.CharField(max_length=100)),
-                ('title', models.TextField(blank=True)),
-                ('scanned', models.BooleanField(default=False)),
-                ('malicious', models.BooleanField(default=False)),
-                ('waiting_for_scan', models.BooleanField(default=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("file_name", models.CharField(max_length=100)),
+                ("title", models.TextField(blank=True)),
+                ("scanned", models.BooleanField(default=False)),
+                ("malicious", models.BooleanField(default=False)),
+                ("waiting_for_scan", models.BooleanField(default=False)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
             ],
             options={
-                'verbose_name': 'BavItem',
-                'verbose_name_plural': 'BavItems',
+                "verbose_name": "BavItem",
+                "verbose_name_plural": "BavItems",
             },
         ),
     ]

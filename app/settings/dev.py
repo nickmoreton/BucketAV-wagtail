@@ -13,7 +13,7 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 CSRF_TRUSTED_ORIGINS = ["https://*.gitpod.io"]
 
-INSTALLED_APPS += [
+INSTALLED_APPS += [  # noqa: F405
     "wagtail.contrib.styleguide",
     "django_extensions",
 ]

@@ -1,12 +1,12 @@
 from django.urls import path, reverse
 from wagtail import hooks
 from wagtail.admin.menu import AdminOnlyMenuItem
-from wagtail.images.wagtail_hooks import ImagesSummaryItem as SummaryItem
-
-from app.bav.views import ImagesReportView
 from wagtail.admin.navigation import get_site_for_user
 from wagtail.images import get_image_model
 from wagtail.images.permissions import permission_policy
+from wagtail.images.wagtail_hooks import ImagesSummaryItem as SummaryItem
+
+from app.bav.views import ImagesReportView
 
 
 @hooks.register("register_reports_menu_item")
