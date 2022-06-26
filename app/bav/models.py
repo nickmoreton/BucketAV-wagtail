@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from wagtail.images.models import AbstractImage, AbstractRendition, Image
+from wagtail.documents.models import Document, AbstractDocument
 
 
 class CustomImage(AbstractImage):
@@ -23,3 +24,11 @@ class Rendition(AbstractRendition):
 
     class Meta:
         unique_together = (("image", "filter_spec", "focal_point_key"),)
+
+
+class CustomDocument(AbstractDocument):
+    # Custom field example:
+    scanned = models.BooleanField(default=False)  # new field
+    malicious = models.BooleanField(default=False)  # new field
+
+    admin_form_fields = Document.admin_form_fields

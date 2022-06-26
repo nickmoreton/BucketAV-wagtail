@@ -168,3 +168,4 @@ WAGTAILSEARCH_BACKENDS = {
 BASE_URL = "http://example.com"
 
 WAGTAILIMAGES_IMAGE_MODEL = "bav.CustomImage"
+WAGTAILDOCS_DOCUMENT_MODEL = "bav.CustomDocument"

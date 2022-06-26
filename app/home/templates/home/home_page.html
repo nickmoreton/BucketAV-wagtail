@@ -6,23 +6,45 @@
 {% block content %}
 
 <div class="container">
-    <h1>Change Image Status</h1>
+    <h2>Change Image Status</h2>
 
     <ul>
         {% for image in images %}
         <li>
-            <div>{{ image|concat_image_filename }}</div>
+            <div>{{ image|parse_image_filename }}</div>
             <div>
-            <a href="?filename={{ image.file }}&result=0"><button class="{% if image.scanned %}active{% endif %}">Scanned</button></a>
+            <a href="?filename={{ image.file }}&result=0&type=image"><button class="{% if image.scanned %}active{% endif %}">Scanned</button></a>
             
-            <a href="?filename={{ image.file }}&result=1"><button class="{% if image.malicious %}active{% endif %}">Malicious</button></a>
+            <a href="?filename={{ image.file }}&result=1&type=image"><button class="{% if image.malicious %}active{% endif %}">Malicious</button></a>
             
-            <a href="?filename={{ image.file }}&result=2"><button class="reset">Reset</button></a>
+            <a href="?filename={{ image.file }}&result=2&type=image"><button class="reset">Reset</button></a>
                 <= <span>Fake web hook</span>
             </div>
             
         </li>
         {% endfor %}
+    </ul>
+</div>
+
+<div class="container">
+    <h2>Change Document Status</h2>
+
+    <ul>
+    {% for document in documents %}
+        <li>
+            <div>
+                {{ document|parse_document_filename }}
+            </div>
+            <div>
+                <a href="?filename={{ document.file }}&result=0&type=document"><button class="{% if document.scanned %}active{% endif %}">Scanned</button></a>
+                
+                <a href="?filename={{ document.file }}&result=1&type=document"><button class="{% if document.malicious %}active{% endif %}">Malicious</button></a>
+                
+                <a href="?filename={{ document.file }}&result=2&type=document"><button class="reset">Reset</button></a>
+                    <= <span>Fake web hook</span>
+            </div>
+        </li>
+    {% endfor %}
     </ul>
 </div>
 
