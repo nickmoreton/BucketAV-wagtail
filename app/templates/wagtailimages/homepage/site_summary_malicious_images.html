@@ -3,8 +3,7 @@
 
 <li>
     {% icon name="no-view" %}
-    {% comment %} {{ total_malicious_images }} {% endcomment %}
-    <a href="{% url 'image_report_view' %}?malicious=true">
+    <a href="{% url 'documents_report_view' %}?malicious=true">
         {% blocktrans trimmed count counter=total_malicious_images with total_malicious_images|intcomma as total %}
             <span>{{ total }}</span> Malicious Image <span class="visuallyhidden">created in {{ site_name }}</span>
         {% plural %}

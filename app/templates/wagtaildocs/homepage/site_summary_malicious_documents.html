@@ -1,0 +1,13 @@
+
+{% load i18n wagtailadmin_tags %}
+
+<li>
+    {% icon name="doc-empty" %}
+    <a href="{% url 'documents_report_view' %}?malicious=true">
+        {% blocktrans trimmed count counter=total_malicious_documents with total_malicious_documents|intcomma as total %}
+            <span>{{ total }}</span> Malicious Document <span class="visuallyhidden">created in {{ site_name }}</span>
+        {% plural %}
+            <span>{{ total }}</span> Malicious Documents <span class="visuallyhidden">created in {{ site_name }}</span>
+        {% endblocktrans %}
+    </a>
+</li>

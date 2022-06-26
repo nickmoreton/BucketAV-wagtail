@@ -1,0 +1,29 @@
+{% extends 'wagtailadmin/reports/base_report.html' %}
+{% load i18n wagtailadmin_tags %}
+
+{% block results %}
+    {% if object_list %}
+    <table class="listing">
+        <thead>
+            <tr>
+                <th class="file-name">File name</th>
+                <th class="action">Action</th>
+                <th class="scanned">Scanned</th>
+                <th class="updated">Malicious</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in object_list %}
+            <tr>
+                <td class="title">{{ obj.title }}</td>
+                <td><a href="{{ obj.get_delete_url }}">Delete</a></td>
+                <td class="scanned">{{ obj.scanned|yesno }}</td>
+                <td class="malicious">{{ obj.malicious|yesno }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No images found.</p>
+    {% endif %}
+{% endblock %}

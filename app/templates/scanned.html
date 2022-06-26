@@ -1,0 +1,50 @@
+{% load i18n wagtailadmin_tags %}
+
+<section class="panel summary nice-padding">
+    <h2 class="title-wrapper">{% trans "Bucket AV Scans" %}</h2>
+    <ul class="stats">
+        <li>
+            {% icon name="view" %}
+            <a href="{% url 'image_report_view' %}?scanned=true">
+                {% blocktrans trimmed count counter=total_scanned_images with total_scanned_images|intcomma as total %}
+                    <span>{{ total }}</span> Scanned Image
+                {% plural %}
+                    <span>{{ total }}</span> Scanned Images
+                {% endblocktrans %}
+            </a>
+        </li>
+        <li>
+            {% icon name="no-view" %}
+            <a href="{% url 'documents_report_view' %}?malicious=true">
+                {% blocktrans trimmed count counter=total_malicious_images with total_malicious_images|intcomma as total %}
+                    <span>{{ total }}</span> Malicious Image
+                {% plural %}
+                    <span>{{ total }}</span> Malicious Images
+                {% endblocktrans %}
+            </a>
+        </li>
+    </ul>
+    <ul class="stats">
+        <li>
+            {% icon name="doc-empty-inverse" %}
+            <a href="{% url 'documents_report_view' %}?scanned=true">
+                {% blocktrans trimmed count counter=total_scanned_documents with total_scanned_documents|intcomma as total %}
+                    <span>{{ total }}</span> Scanned Document
+                {% plural %}
+                    <span>{{ total }}</span> Scanned Documents
+                {% endblocktrans %}
+            </a>
+        </li>
+        <li>
+            {% icon name="doc-empty" %}
+            <a href="{% url 'documents_report_view' %}?malicious=true">
+                {% blocktrans trimmed count counter=total_malicious_documents with total_malicious_documents|intcomma as total %}
+                    <span>{{ total }}</span> Malicious Document
+                {% plural %}
+                    <span>{{ total }}</span> Malicious Documents
+                {% endblocktrans %}
+            </a>
+        </li>
+    </ul>
+</section>
+        

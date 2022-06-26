@@ -1,0 +1,13 @@
+
+{% load i18n wagtailadmin_tags %}
+
+<li>
+    {% icon name="doc-empty-inverse" %}
+    <a href="{% url 'documents_report_view' %}?scanned=true">
+        {% blocktrans trimmed count counter=total_scanned_documents with total_scanned_documents|intcomma as total %}
+            <span>{{ total }}</span> Scanned Document <span class="visuallyhidden">created in {{ site_name }}</span>
+        {% plural %}
+            <span>{{ total }}</span> Scanned Documents <span class="visuallyhidden">created in {{ site_name }}</span>
+        {% endblocktrans %}
+    </a>
+</li>

@@ -32,3 +32,6 @@ class CustomDocument(AbstractDocument):
     malicious = models.BooleanField(default=False)  # new field
 
     admin_form_fields = Document.admin_form_fields
+
+    def get_delete_url(self):
+        return reverse("wagtaildocs:delete", args=(self.id,))
