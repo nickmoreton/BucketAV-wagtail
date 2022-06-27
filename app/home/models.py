@@ -1,7 +1,13 @@
+from django.db import models
+from wagtail.admin.panels import FieldPanel
 from wagtail.core.models import Page
-from wagtail.images import get_image_model
 from wagtail.documents import get_document_model
-from app.bav.views import image_scan_hook_simulation, document_scan_hook_simulation
+from wagtail.fields import RichTextField
+from wagtail.images import get_image_model, get_image_model_string
+from wagtail.images.edit_handlers import ImageChooserPanel
+
+from app.bav.views import (document_scan_hook_simulation,
+                           image_scan_hook_simulation)
 
 
 class HomePage(Page):
@@ -25,3 +31,20 @@ class HomePage(Page):
         context["documents"] = documents
 
         return context
+
+
+class StandardPage(Page):
+    body = RichTextField(blank=True)
+
+    image = models.ForeignKey(
+        get_image_model_string(),
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+    )
+
+    content_panels = Page.content_panels + [
+        FieldPanel("body"),
+        ImageChooserPanel("image"),
+    ]

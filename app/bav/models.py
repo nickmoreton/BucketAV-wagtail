@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
+from wagtail.documents.models import AbstractDocument, Document
 from wagtail.images.models import AbstractImage, AbstractRendition, Image
-from wagtail.documents.models import Document, AbstractDocument
 
 
 class CustomImage(AbstractImage):

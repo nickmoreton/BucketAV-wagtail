@@ -1,7 +1,7 @@
 from wagtail.admin.filters import WagtailFilterSet
 from wagtail.admin.views.reports import ReportView
-from wagtail.images import get_image_model
 from wagtail.documents import get_document_model
+from wagtail.images import get_image_model
 
 
 class ImagesReportFilterSet(WagtailFilterSet):

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-standardpage{% endblock %}
+
+{% block content %}
+
+<div>
+    {{ page.body|richtext }}
+</div>
+
+<div>
+    {% image page.image fill-800x600 %}
+</div>
+
+{% endblock content %}

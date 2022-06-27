@@ -1,16 +1,13 @@
-from django.urls import path, reverse
-from django.template.loader import get_template
 from django.template import Context
+from django.template.loader import get_template
+from django.urls import path, reverse
 from wagtail import hooks
 from wagtail.admin.menu import AdminOnlyMenuItem
-from wagtail.images import get_image_model
-from wagtail.documents import get_document_model
-
-
 from wagtail.admin.ui.components import Component
-from wagtail import hooks
+from wagtail.documents import get_document_model
+from wagtail.images import get_image_model
 
-from app.bav.views import ImagesReportView, DocumentsReportView
+from app.bav.views import DocumentsReportView, ImagesReportView
 
 
 class BucketAVPanel(Component):

@@ -21,18 +21,17 @@
     <ul class="listing horiz images">
         {% for image in images %}
             <li {% if image.malicious %}style="position:relative"{% endif %}>
-                <div {% if image.malicious %}class="help-block help-critical"{% endif %} style="position:absolute;top:-1em;right:0px;padding:10px">
-                {% if image.malicious %}
-                <span>
-                    {% comment %} <svg class="icon icon-warning" aria-hidden="true"><use href="#icon-warning"></use></svg> {% endcomment %}
-                    Is Malicious
-                </span>
-                {% endif %}
-                </div>
                 {% include "wagtailadmin/bulk_actions/listing_checkbox_cell.html" with obj_type="image" obj=image aria_labelledby_prefix="select-image-label image_" aria_labelledby=image.pk|unlocalize aria_labelledby_suffix="_title" %}
+                {% if image.malicious %}
+                <a class="image-choice" title="{% if collections %}{{ image.collection.name }} » {% endif %}{{ image.title }}" href="#">
+                    <figure>
+                        Is Malicious <br />
+                        <svg class="icon icon-no-view icon" aria-hidden="true" width="120" height="120" opacity="40%"><use href="#icon-no-view"></use></svg>
+                        {% else %}
                 <a class="image-choice" title="{% if collections %}{{ image.collection.name }} » {% endif %}{{ image.title }}" href="{% url 'wagtailimages:edit' image.id %}{% if next %}?next={{ next|urlencode }}{% endif %}">
                     <figure>
                         {% include "wagtailimages/images/results_image.html" %}
+                        {% endif %}
                         {% trans "pixels" as translated_pixels %}
                         <figcaption id="image_{{ image.pk|unlocalize }}_title">
                             {{ image.title|ellipsistrim:60 }}
